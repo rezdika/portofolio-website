@@ -34,15 +34,17 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 RUN mkdir -p database storage/framework/cache/data storage/framework/sessions \
         storage/framework/views storage/logs bootstrap/cache \
+        /var/log/supervisor /run/nginx \
     && touch database/database.sqlite \
     && chmod -R 775 storage bootstrap/cache database \
     && chown -R www-data:www-data storage bootstrap/cache database
 
-COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/php.ini /usr/local/etc/php/conf.d/custom.ini
+COPY docker/start.sh /start.sh
+RUN chmod +x /start.sh
 
 ENV PORT=8080
 EXPOSE 8080
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/start.sh"]
