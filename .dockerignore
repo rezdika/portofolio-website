@@ -1,7 +1,15 @@
 /node_modules
 /vendor
 /public/build
+/public/hot
+/storage/pail
 *.zip
 .env
 .git
 .gitignore
+.gitattributes
+README.md
+phpunit.xml
+tests/
+.editorconfig
+.npmrc
