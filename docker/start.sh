@@ -2,6 +2,7 @@
 set -e
 
 PORT=${PORT:-8080}
+echo "Starting on port: $PORT"
 
 # Generate nginx config with dynamic port
 cat > /etc/nginx/nginx.conf <<EOF
